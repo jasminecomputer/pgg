@@ -1,0 +1,8 @@
+{
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL": "mongodb+srv://user1:FhttLaL505!@cluster0.qycdb.mongodb.net/?retryWrites=true&w=majority",
+      "MONGO_OPLOG_URL": "mongodb+srv://oplog:FhttLaL505!>@cluster0.qycdb.mongodb.net/local"
+    }
+  }
+}
