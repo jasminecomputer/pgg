@@ -4,8 +4,7 @@ export default class TaskStimulus extends React.Component {
   render() {
     const { game, round, stage, player } = this.props;
 
-    /*const multiplier = game.treatment.multiplier;*/
-    const multiplier = 1.3;
+    const multiplier = game.treatment.multiplier;
     const endowment = game.treatment.endowment;
     const returnsA = (endowment * multiplier) / 2;
     const returnsB = (endowment * multiplier) / 2 + endowment;

@@ -58,7 +58,7 @@ Empirica.onGameEnd((game) => {});
 // compute each players' payoffs
 function computePayoff(game, round) {
   /*const multiplier = game.treatment.multiplier*/
-  const multiplier = 1.3;
+  const multiplier = game.treatment.multiplier;
   game.players.forEach((player) => {
     const contribution = player.round.get("contribution");
     const totalContributions = round.get("totalContributions");

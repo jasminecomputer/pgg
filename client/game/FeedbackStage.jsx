@@ -1,9 +1,24 @@
 import React from "react";
 
 export default class FeedbackStage extends React.Component {
+  onNext = (event) => {
+    event.preventDefault();
+    this.props.player.stage.submit();
+  };
+  renderSubmitted() {
+    return (
+      <div className="task-response">
+        <div className="response-submitted">
+          <h5>Waiting on other players...</h5>
+          Please wait until all players are ready
+        </div>
+      </div>
+    );
+  }
+
   render() {
     /*const { hasNext, onNext, player, round } = this.props;*/
-    const { hasNext, onNext, game, stage, player, round } = this.props;
+    const { game, stage, player, round } = this.props;
 
     const payoff = round.get("payoff");
     const punished = player.round.get("punished");
@@ -17,6 +32,11 @@ export default class FeedbackStage extends React.Component {
     const penalties = player.round.get("penalties");
     const remainingEndowment = player.round.get("remainingEndowment");
     const roundPayoff = player.round.get("roundPayoff");
+
+    if (player.stage.submitted) {
+      return this.renderSubmitted();
+    }
+
     return (
       <div>
         <h4>Summary</h4>
@@ -30,7 +50,7 @@ export default class FeedbackStage extends React.Component {
         <h2>Received punishments from: {punishedByObj} </h2>
         <h2>Total penalties: {penalties} MU</h2>
         <h1>Total round payoff: {roundPayoff} MU</h1>
-        <button type="button" onClick={onNext} disabled={!hasNext}>
+        <button type="button" onClick={this.onNext}>
           Next
         </button>
       </div>
