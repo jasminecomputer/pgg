@@ -6,6 +6,7 @@ export default class PunishmentStage extends React.Component {
     const { game, round, stage, player } = this.props;
     const totalContributions = round.get("totalContributions");
     const contribution = player.round.get("contribution");
+    const multiplier = game.treatment.punishmentMultiplier;
 
     const totalReturns = round.get("totalReturns");
     const payoff = round.get("payoff");
@@ -20,7 +21,9 @@ export default class PunishmentStage extends React.Component {
         <h2>Individual payoff: {payoff} MU </h2>
 
         <div></div>
-        <h3>It will cost you 1 MU to impose a punishment of 3 MU</h3>
+        <h3>Costs you 1 MU to impose each punishment of {multiplier} MU</h3>
+        <h3>How many punishments do you want to impose?</h3>
+
         <div>
           <PunishmentResponse
             game={game}

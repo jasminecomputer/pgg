@@ -6,8 +6,6 @@ export default class SocialExposure extends React.Component {
   renderSocialInteraction(otherPlayer) {
     const value = otherPlayer.round.get("value");
     const cumulativePayoff = otherPlayer.get("cumulativePayoff");
-    const choices = otherPlayer.get("choices");
-    const punishChoices = otherPlayer.get("punishChoices");
     return (
       <div className="alter" key={otherPlayer._id}>
         <img src={otherPlayer.get("avatar")} className="profile-avatar" />

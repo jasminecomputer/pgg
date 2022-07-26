@@ -5,7 +5,7 @@ import SocialExposure from "./SocialExposure.jsx";
 import Task from "./Task.jsx";
 import PunishmentStage from "./PunishmentStage.jsx";
 import Choices from "./Choices.jsx";
-import SummaryStage from "./SummaryStage.jsx";
+import FeedbackStage from "./FeedbackStage.jsx";
 
 export default class Round extends React.Component {
   render() {
@@ -37,15 +37,17 @@ export default class Round extends React.Component {
                   player={player}
                 />
               ) : null}
-              {stage.name == "summary" ? (
-                <SummaryStage
+              {stage.name == "feedback" ? (
+                <FeedbackStage
                   stage={stage}
                   player={player}
                   game={game}
                   round={round}
                 />
               ) : null}
-              <SocialExposure stage={stage} player={player} game={game} />
+              {game.treatment.social ? (
+                <SocialExposure stage={stage} player={player} game={game} />
+              ) : null}
             </div>
           </div>
         </div>

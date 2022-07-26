@@ -18,10 +18,9 @@ Empirica.onRoundStart((game, round) => {
   round.set("payoff", 0);
   game.players.forEach((player, i) => {
     player.round.set("endowment", game.treatment.endowment);
-    player.round.set("punishedBy", []);
-    player.round.set("punished", []);
+    player.round.set("punishedBy", {});
     player.round.set("contribution", 0);
-    player.round.set("punishedDict", {});
+    player.round.set("punished", {});
   });
 });
 
@@ -39,15 +38,6 @@ Empirica.onStageEnd((game, round, stage) => {
     computePunishmentCosts(game, round);
     computeIndividualPayoff(game, round);
   }
-  /*
-  game.players.forEach((player) => {
-    if (stage.name == "punishment") {
-      const punished = player.round.get("punished");
-      player.set("punished", [...player.get("punished"), punished]);
-      const punishedBy = player.round.get("punishedBy");
-      player.set("punishedBy", [...player.get("punishedBy"), punishedBy]);
-    }
-  });*/
 });
 
 // onRoundEnd is triggered after each round.
@@ -89,29 +79,27 @@ function computePayoff(game, round) {
 function computePunishmentCosts(game, round) {
   game.players.forEach((player) => {
     const punished = player.round.get("punished");
-    const punishedDict = player.round.get("punishedDict");
-    const punishedKeys = Object.keys(punishedDict);
+    const punishedKeys = Object.keys(punished);
     let cost = 0;
     for (const key of punishedKeys) {
-      if (punishedDict[key] != "0") {
-        cost++;
+      if (punished[key] != "0") {
+        amount = punished[key];
+        cost += parseFloat(amount);
       } else {
       }
     }
     let punishedBy = {};
     /*const cost = punished.length;*/
-    /*const cost = Object.keys(punishedDict).length;*/
     player.round.set("costs", cost);
     const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
     otherPlayers.forEach((otherPlayer) => {
       const otherPlayerPunished = otherPlayer.round.get("punished");
-      const otherPlayerPunishedDict = otherPlayer.round.get("punishedDict");
       console.log(otherPlayerPunished);
       console.log("player", player._id);
-      if (Object.keys(otherPlayerPunishedDict).includes(player._id)) {
+      if (Object.keys(otherPlayerPunished).includes(player._id)) {
         console.log("true,", otherPlayer._id, "punishes", player._id);
         /*punishedBy.push(otherPlayer._id);*/
-        punishedBy[otherPlayer._id] = otherPlayerPunishedDict[player._id];
+        punishedBy[otherPlayer._id] = otherPlayerPunished[player._id];
         console.log(punishedBy);
       }
     });
@@ -125,7 +113,8 @@ function computePunishmentCosts(game, round) {
         receivedPunishments += parseFloat(amount);
       }
     }
-    const penalties = parseFloat(receivedPunishments) * parseFloat(3);
+    const penalties =
+      parseFloat(receivedPunishments) * game.treatment.punishmentMultiplier;
     /*
     const penalties =
       parseFloat(Object.keys(punishedBy).length) * parseFloat(3);*/
@@ -140,6 +129,7 @@ function computeIndividualPayoff(game, round) {
     const contribution = player.round.get("contribution");
     const remainingEndowment =
       parseFloat(game.treatment.endowment) - parseFloat(contribution);
+    player.round.set("remainingEndowment", remainingEndowment);
     const penalties = player.round.get("penalties");
     const costs = player.round.get("costs");
     const roundPayoff =

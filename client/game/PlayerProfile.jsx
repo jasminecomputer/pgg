@@ -8,7 +8,6 @@ export default class PlayerProfile extends React.Component {
     const { player } = this.props;
     return (
       <div className="profile-score">
-        <h3>Your Profile</h3>
         <img src={player.get("avatar")} className="profile-avatar" />
       </div>
     );

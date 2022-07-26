@@ -54,8 +54,9 @@ export default class TaskResponse extends React.Component {
   }
 
   render() {
-    const { player } = this.props;
+    const { player, game } = this.props;
     const contribution = player.round.get("contribution");
+    const keep = game.treatment.endowment - parseFloat(contribution);
     // If the player already submitted, don't show the slider or submit button
     if (player.stage.submitted) {
       return this.renderSubmitted();
@@ -66,7 +67,9 @@ export default class TaskResponse extends React.Component {
         <form onSubmit={this.handleSubmit}>
           {this.renderInput()}
 
-          <div>Amount: {contribution} </div>
+          <div>Contribute: {contribution} </div>
+          <div>Keep: {keep} </div>
+
           <button type="submit">Submit</button>
         </form>
       </div>

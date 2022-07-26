@@ -1,27 +1,52 @@
 import React, { Component } from "react";
 
 export default class PunishmentResponse extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      formError: "",
+      amountValid: false,
+    };
+  }
+
   handleChange = (event, param) => {
     const { player } = this.props;
     console.log(event.target.value);
     console.log(param);
-
-    const punishedDict = player.round.get("punishedDict");
-    punishedDict[param] = event.target.value;
-    console.log("updated punished", punishedDict);
-    player.round.set("punishedDict", punishedDict);
-
-    /*
-    if (value != "No") {
-      const punished = [...player.round.get("punished"), value];
-      player.round.set("punished", punished);
-    }*/
+    this.setState({ formError: "" });
+    const punished = player.round.get("punished");
+    punished[param] = event.target.value;
+    console.log("updated punished", punished);
+    player.round.set("punished", punished);
   };
 
   handleSubmit = (event) => {
     const { player } = this.props;
     event.preventDefault();
-    this.props.player.stage.submit();
+    const punished = player.round.get("punished");
+
+    const cumulativePayoff = parseFloat(player.get("cumulativePayoff"));
+    let totalPunishmentCost = 0;
+    const punishedKeys = Object.keys(punished);
+
+    for (const key of punishedKeys) {
+      totalPunishmentCost += parseFloat(punished[key]);
+    }
+    console.log("total punishment cost", totalPunishmentCost);
+    console.log("payoff", cumulativePayoff);
+    console.log(totalPunishmentCost > cumulativePayoff);
+
+    if (totalPunishmentCost > cumulativePayoff) {
+      console.log("total punishment cost exceeds payoff");
+      this.setState({ formError: "Error: punishment cost exceeds payoff" });
+    } else {
+      this.setState({ formError: "" });
+    }
+    console.log("error", this.state.formError);
+    if (totalPunishmentCost > cumulativePayoff) {
+    } else {
+      this.props.player.stage.submit();
+    }
   };
 
   renderSubmitted() {
@@ -41,27 +66,14 @@ export default class PunishmentResponse extends React.Component {
     return (
       <div>
         <div> Player: {player._id}</div>
+        {/*<img src={player.get("avatar")} className="profile-avatar" />*/}
         <div> Contribution: {contribution} MU </div>
         <form>
-          {/*}
           <label>
-            <input type="radio" value="No" onChange={this.handleChange} />
-            Don't punish
-          </label>
-          <br></br>
-          <label>
-            <input
-              type="radio"
-              value={player._id}
-              onChange={this.handleChange}
-            />
-            Punish
-          </label>
-    */}
-          <label>
-            Punish
+            Punishments
             <input
               type="number"
+              id={player._id}
               onChange={(event) => this.handleChange(event, player._id)}
               min="0"
             />
@@ -74,26 +86,36 @@ export default class PunishmentResponse extends React.Component {
   render() {
     const { game, player } = this.props;
     const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
+    const formError = this.state.formError;
+    const cumulativePayoff = player.get("cumulativePayoff");
 
-    const punish = player.round.get("punish");
-    const punished = player.round.get("punished");
-    console.log(punished);
-
-    // If the player already submitted, don't show the slider or submit button
+    // If the player already submitted, don't show the input or submit button
     if (player.stage.submitted) {
+      if (cumulativePayoff < 0) {
+        return (
+          <div>
+            <div>You do not have enough to punish other players</div>
+            {this.renderSubmitted()}
+          </div>
+        );
+      }
       return this.renderSubmitted();
     }
 
-    return (
-      <div className="task-response">
-        <form onSubmit={this.handleSubmit}>
-          {/*
+    if (cumulativePayoff > 0) {
+      return (
+        <div className="task-response">
+          <form onSubmit={this.handleSubmit}>
+            {/*
           {this.renderInput()}*/}
-          {otherPlayers.map((player) => this.renderInput(player))}
-
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    );
+            {otherPlayers.map((player) => this.renderInput(player))}
+            <button type="submit">Submit</button>
+            <p>{formError}</p>
+          </form>
+        </div>
+      );
+    } else {
+      return <div>{this.props.player.stage.submit()}</div>;
+    }
   }
 }
