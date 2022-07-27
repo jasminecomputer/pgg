@@ -46,8 +46,8 @@ Empirica.gameInit((game) => {
       });
     }
     round.addStage({
-      name: "feedback",
-      displayName: "Feedback",
+      name: "outcome",
+      displayName: "Outcome",
       durationInSeconds: game.treatment.stageDuration,
     });
   });

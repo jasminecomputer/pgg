@@ -70,7 +70,7 @@ export default class TaskResponse extends React.Component {
           <div>Contribute: {contribution} </div>
           <div>Keep: {keep} </div>
 
-          <button type="submit">Submit</button>
+          <button type="submit">Contribute</button>
         </form>
       </div>
     );

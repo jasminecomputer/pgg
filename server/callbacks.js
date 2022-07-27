@@ -53,24 +53,24 @@ Empirica.onRoundEnd((game, round) => {
 
 // onGameEnd is triggered when the game ends.
 // It receives the same options as onGameStart.
-Empirica.onGameEnd((game) => {});
+Empirica.onGameEnd((game) => {
+  computeTotalPayoff(game);
+  convertPayoff(game);
+});
 
 // compute each players' payoffs
 function computePayoff(game, round) {
-  /*const multiplier = game.treatment.multiplier*/
   const multiplier = game.treatment.multiplier;
+  let newTotalContributions = 0;
   game.players.forEach((player) => {
     const contribution = player.round.get("contribution");
-    const totalContributions = round.get("totalContributions");
-    const newTotalContributions =
-      parseFloat(totalContributions) + parseFloat(contribution);
-    round.set("totalContributions", newTotalContributions);
+    newTotalContributions += parseFloat(contribution);
   });
+  round.set("totalContributions", newTotalContributions);
   const multipliedReturns = Math.round(
     round.get("totalContributions") * multiplier
   );
   round.set("totalReturns", multipliedReturns);
-  console.log(round.get("totalReturns"));
   const totalReturns = round.get("totalReturns");
   const payoff = Math.round(totalReturns / game.players.length);
   round.set("payoff", payoff);
@@ -89,16 +89,11 @@ function computePunishmentCosts(game, round) {
       }
     }
     let punishedBy = {};
-    /*const cost = punished.length;*/
     player.round.set("costs", cost);
     const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
     otherPlayers.forEach((otherPlayer) => {
       const otherPlayerPunished = otherPlayer.round.get("punished");
-      console.log(otherPlayerPunished);
-      console.log("player", player._id);
       if (Object.keys(otherPlayerPunished).includes(player._id)) {
-        console.log("true,", otherPlayer._id, "punishes", player._id);
-        /*punishedBy.push(otherPlayer._id);*/
         punishedBy[otherPlayer._id] = otherPlayerPunished[player._id];
         console.log(punishedBy);
       }
@@ -115,14 +110,11 @@ function computePunishmentCosts(game, round) {
     }
     const penalties =
       parseFloat(receivedPunishments) * game.treatment.punishmentMultiplier;
-    /*
-    const penalties =
-      parseFloat(Object.keys(punishedBy).length) * parseFloat(3);*/
     player.round.set("penalties", penalties);
-    /*punish the other players- maybe need to set a dictionary that stores who punished who? */
   });
 }
 
+// computes players' individual payoff (round payoff minus punishment costs and penalties)
 function computeIndividualPayoff(game, round) {
   game.players.forEach((player) => {
     const payoff = round.get("payoff");
@@ -138,6 +130,25 @@ function computeIndividualPayoff(game, round) {
       parseFloat(penalties) -
       parseFloat(costs);
     player.round.set("roundPayoff", roundPayoff);
+  });
+}
+
+// computes the total payoff across all players (measure of cooperation) //
+function computeTotalPayoff(game) {
+  let totalPayoff = 0;
+  game.players.forEach((player) => {
+    const cumulativePayoff = player.get("cumulativePayoff");
+    totalPayoff += parseFloat(payoff);
+    game.set("totalPayoff", totalPayoff);
+  });
+}
+
+// converts player's payoff to real money
+function convertPayoff(game) {
+  game.players.forEach((player) => {
+    const cumulativePayoff = player.get("cumulativePayoff");
+    const money = parseFloat(cumulativePayoff) * game.treatment.conversionRate;
+    player.set("convertedMoney", money);
   });
 }
 

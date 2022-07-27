@@ -20,6 +20,11 @@ export default class PunishmentResponse extends React.Component {
     player.round.set("punished", punished);
   };
 
+  handleClick = (event, player) => {
+    event.preventDefault();
+    showInput = true;
+  };
+
   handleSubmit = (event) => {
     const { player } = this.props;
     event.preventDefault();
@@ -59,10 +64,10 @@ export default class PunishmentResponse extends React.Component {
       </div>
     );
   }
-
   renderInput(player) {
     /*const { player } = this.props;*/
     const contribution = player.round.get("contribution");
+
     return (
       <div>
         <div> Player: {player._id}</div>
@@ -79,6 +84,20 @@ export default class PunishmentResponse extends React.Component {
             />
           </label>
         </form>
+      </div>
+    );
+  }
+
+  renderPlayer(player) {
+    const contribution = player.round.get("contribution");
+    let showInput = false;
+    return (
+      <div>
+        <button onClick={(event) => this.handleClick(event, player)}>
+          Player: {player._id}
+          <div>Contribution: {contribution} MU</div>
+        </button>
+        {showInput ? this.renderInput(player) : null}
       </div>
     );
   }

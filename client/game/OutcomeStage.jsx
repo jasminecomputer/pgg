@@ -1,6 +1,7 @@
 import React from "react";
+import ListView from "./ListView.jsx";
 
-export default class FeedbackStage extends React.Component {
+export default class OutcomeStage extends React.Component {
   onNext = (event) => {
     event.preventDefault();
     this.props.player.stage.submit();
@@ -40,15 +41,16 @@ export default class FeedbackStage extends React.Component {
     return (
       <div>
         <h4>Summary</h4>
-        <h2> Round payoff: {payoff} </h2>
-        <h2>Remaining endowment: {remainingEndowment}</h2>
         <h2>
           Punishments given to:
-          {punishedObj};
+          {<ListView players={punishedObj} />}
         </h2>
-        <h2> Costs of punishing: {costs} MU </h2>
-        <h2>Received punishments from: {punishedByObj} </h2>
-        <h2>Total penalties: {penalties} MU</h2>
+        <h2>Punished you: {<ListView players={punishedByObj} />}</h2>
+
+        <h2> Round payoff: {payoff} </h2>
+        <h2>Remaining endowment: {remainingEndowment}</h2>
+        <h2> Costs of punishing: -{costs} MU </h2>
+        <h2>Total penalties: -{penalties} MU</h2>
         <h1>Total round payoff: {roundPayoff} MU</h1>
         <button type="button" onClick={this.onNext}>
           Next
