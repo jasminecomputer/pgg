@@ -5,12 +5,12 @@ import { Centered } from "meteor/empirica:core";
 export default class Quiz extends React.Component {
   state = { sum: "", horse: "" };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const el = event.currentTarget;
     this.setState({ [el.name]: el.value.trim().toLowerCase() });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     if (this.state.sum !== "4" || this.state.horse !== "white") {

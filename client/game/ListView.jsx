@@ -1,16 +1,26 @@
 import React from "react";
 
 export default class ListView extends React.Component {
-  render() {
-    const { players } = this.props;
-    const listPlayers = players.map((player, i) => {
-      return <li key={i}>{player}</li>;
-    });
+  renderPlayer(player, punishments) {
+    return (
+      <div>
+        {player}
+        <p>{punishments[player]}</p>
+      </div>
+    );
+  }
 
-    if (listPlayers.length > 0) {
-      return <div> {listPlayers}</div>;
-    } else {
+  render() {
+    const { punishments } = this.props;
+
+    if (Object.keys(punishments).length == 0) {
       return <div> None </div>;
     }
+
+    return (
+      <div>
+        {Object.keys(punishments).map((p) => this.renderPlayer(p, punishments))}
+      </div>
+    );
   }
 }

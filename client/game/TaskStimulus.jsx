@@ -14,7 +14,6 @@ export default class TaskStimulus extends React.Component {
       ((parseFloat(playerValue) + parseFloat(playerBValue)) * multiplier) /
       2
     ).toFixed(0);
-    /*
     const returnsA = ((playerValue * multiplier) / 2).toFixed(0);
     const returnsA_other = parseFloat(returnsA) + parseFloat(playerBValue);
 

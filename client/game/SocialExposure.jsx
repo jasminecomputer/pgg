@@ -1,22 +1,15 @@
 import React from "react";
 import Slider from "meteor/empirica:slider";
-import Choices from "./Choices.jsx";
+import Choices from "./ListView.jsx";
 
 export default class SocialExposure extends React.Component {
   renderSocialInteraction(otherPlayer) {
-    const value = otherPlayer.round.get("value");
     const cumulativePayoff = otherPlayer.get("cumulativePayoff");
     return (
       <div className="alter" key={otherPlayer._id}>
         <img src={otherPlayer.get("avatar")} className="profile-avatar" />
         <div>Player key: {otherPlayer._id}</div> <br></br>
         <div>Player Total MU: {cumulativePayoff}</div>
-        {/*
-        <div className="range">
-          Previous choices: <Choices choices={choices} />
-        </div>
-        <div className="range">
-    Punishment choices: <Choices choices={punishChoices} /> </div>*/}
       </div>
     );
   }

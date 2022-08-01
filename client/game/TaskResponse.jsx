@@ -17,8 +17,7 @@ export default class TaskResponse extends React.Component {
     return (
       <div className="task-response">
         <div className="response-submitted">
-          <h5>Waiting on other players...</h5>
-          Please wait until all players are ready
+          <h5>Waiting on other players' contributions...</h5>
         </div>
       </div>
     );
@@ -68,7 +67,7 @@ export default class TaskResponse extends React.Component {
           {this.renderInput()}
 
           <div>Contribute: {contribution} </div>
-          <div>Keep: {keep} </div>
+          <div> You keep: {keep} </div>
 
           <button type="submit">Contribute</button>
         </form>

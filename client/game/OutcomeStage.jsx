@@ -43,9 +43,9 @@ export default class OutcomeStage extends React.Component {
         <h4>Summary</h4>
         <h2>
           Punishments given to:
-          {<ListView players={punishedObj} />}
+          {<ListView punishments={punished} />}
         </h2>
-        <h2>Punished you: {<ListView players={punishedByObj} />}</h2>
+        <h2>Punished you: {<ListView punishments={punishedBy} />}</h2>
 
         <h2> Round payoff: {payoff} </h2>
         <h2>Remaining endowment: {remainingEndowment}</h2>
@@ -53,7 +53,7 @@ export default class OutcomeStage extends React.Component {
         <h2>Total penalties: -{penalties} MU</h2>
         <h1>Total round payoff: {roundPayoff} MU</h1>
         <button type="button" onClick={this.onNext}>
-          Next
+          Next Round
         </button>
       </div>
     );

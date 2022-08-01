@@ -4,7 +4,7 @@ import PlayerProfile from "./PlayerProfile.jsx";
 import SocialExposure from "./SocialExposure.jsx";
 import Task from "./Task.jsx";
 import PunishmentStage from "./PunishmentStage.jsx";
-import Choices from "./Choices.jsx";
+import Choices from "./ListView.jsx";
 import OutcomeStage from "./OutcomeStage.jsx";
 
 export default class Round extends React.Component {

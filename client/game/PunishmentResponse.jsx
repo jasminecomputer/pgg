@@ -58,8 +58,7 @@ export default class PunishmentResponse extends React.Component {
     return (
       <div className="task-response">
         <div className="response-submitted">
-          <h5>Waiting on other players...</h5>
-          Please wait until all players are ready
+          <h5>Waiting on other players' punishments...</h5>
         </div>
       </div>
     );
