@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Task.css";
 
 export default class TaskResponse extends React.Component {
   handleChange = (event) => {
@@ -15,7 +16,7 @@ export default class TaskResponse extends React.Component {
 
   renderSubmitted() {
     return (
-      <div className="task-response">
+      <div className="task-response-container">
         <div className="response-submitted">
           <h5>Waiting on other players' contributions...</h5>
         </div>
@@ -28,12 +29,15 @@ export default class TaskResponse extends React.Component {
     const endowment = game.treatment.endowment;
     return (
       <div>
+        <div>Amount you would like to contribute:</div>
+
         <label>
           <input
             type="number"
             onChange={this.handleChange}
             min="0"
             max={endowment}
+            className="text-area"
           />
         </label>
         <br></br>
@@ -55,21 +59,26 @@ export default class TaskResponse extends React.Component {
   render() {
     const { player, game } = this.props;
     const contribution = player.round.get("contribution");
-    const keep = game.treatment.endowment - parseFloat(contribution);
+    const endowment = game.treatment.endowment;
+    const keep = endowment - parseFloat(contribution);
     // If the player already submitted, don't show the slider or submit button
     if (player.stage.submitted) {
       return this.renderSubmitted();
     }
 
     return (
-      <div className="task-response">
+      <div className="task-response-container">
         <form onSubmit={this.handleSubmit}>
           {this.renderInput()}
 
-          <div>Contribute: {contribution} </div>
-          <div> You keep: {keep} </div>
+          {/*<div>Contribute: {contribution} </div>*/}
+          {0 <= parseFloat(contribution) && contribution <= endowment ? (
+            <div> You keep: {keep} </div>
+          ) : null}
 
-          <button type="submit">Contribute</button>
+          <button type="submit" className="contribute-button">
+            Contribute
+          </button>
         </form>
       </div>
     );

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./PunishmentResponse.css";
 
 export default class PunishmentResponse extends React.Component {
   constructor(props) {
@@ -6,17 +7,14 @@ export default class PunishmentResponse extends React.Component {
     this.state = {
       formError: "",
       amountValid: false,
+      punishmentDict: {},
     };
   }
 
   handleChange = (event, param) => {
     const { player } = this.props;
-    console.log(event.target.value);
-    console.log(param);
-    this.setState({ formError: "" });
     const punished = player.round.get("punished");
     punished[param] = event.target.value;
-    console.log("updated punished", punished);
     player.round.set("punished", punished);
   };
 
@@ -33,22 +31,27 @@ export default class PunishmentResponse extends React.Component {
     const cumulativePayoff = parseFloat(player.get("cumulativePayoff"));
     let totalPunishmentCost = 0;
     const punishedKeys = Object.keys(punished);
+    let negatives = 0;
 
     for (const key of punishedKeys) {
+      if (parseFloat(punished[key]) < 0) {
+        negatives += 1;
+      }
       totalPunishmentCost += parseFloat(punished[key]);
     }
-    console.log("total punishment cost", totalPunishmentCost);
-    console.log("payoff", cumulativePayoff);
-    console.log(totalPunishmentCost > cumulativePayoff);
+    console.log("negatives", negatives);
 
     if (totalPunishmentCost > cumulativePayoff) {
-      console.log("total punishment cost exceeds payoff");
-      this.setState({ formError: "Error: punishment cost exceeds payoff" });
+      this.setState({
+        formError: "Error: punishment cost exceeds your total MU",
+      });
+    } else if (negatives > 0) {
+      this.setState({ formError: "Error: punishment cannot be negative" });
     } else {
       this.setState({ formError: "" });
     }
     console.log("error", this.state.formError);
-    if (totalPunishmentCost > cumulativePayoff) {
+    if (totalPunishmentCost > cumulativePayoff || negatives > 0) {
     } else {
       this.props.player.stage.submit();
     }
@@ -56,30 +59,29 @@ export default class PunishmentResponse extends React.Component {
 
   renderSubmitted() {
     return (
-      <div className="task-response">
-        <div className="response-submitted">
+      <div>
+        <div className="punishment-submitted center">
           <h5>Waiting on other players' punishments...</h5>
         </div>
       </div>
     );
   }
   renderInput(player) {
-    /*const { player } = this.props;*/
     const contribution = player.round.get("contribution");
 
     return (
-      <div>
-        <div> Player: {player._id}</div>
-        {/*<img src={player.get("avatar")} className="profile-avatar" />*/}
-        <div> Contribution: {contribution} MU </div>
+      <div className="center">
+        {<img src={player.get("avatar")} className="player-avatar" />}
+        <div> Contributed: {contribution} MU </div>
         <form>
           <label>
-            Punishments
             <input
               type="number"
               id={player._id}
               onChange={(event) => this.handleChange(event, player._id)}
               min="0"
+              placeholder="# of punishments"
+              className="input-area"
             />
           </label>
         </form>
@@ -94,6 +96,7 @@ export default class PunishmentResponse extends React.Component {
       <div>
         <button onClick={(event) => this.handleClick(event, player)}>
           Player: {player._id}
+          {<img src={player.get("avatar")} className="player-avatar" />}
           <div>Contribution: {contribution} MU</div>
         </button>
         {showInput ? this.renderInput(player) : null}
@@ -122,13 +125,22 @@ export default class PunishmentResponse extends React.Component {
 
     if (cumulativePayoff > 0) {
       return (
-        <div className="task-response">
+        <div className="otherPlayers">
           <form onSubmit={this.handleSubmit}>
             {/*
+
           {this.renderInput()}*/}
-            {otherPlayers.map((player) => this.renderInput(player))}
-            <button type="submit">Submit</button>
-            <p>{formError}</p>
+
+            <div className="row">
+              {otherPlayers.map((player) => this.renderInput(player))}
+            </div>
+            <div className="center">
+              <button type="submit" className="punish-button">
+                Punish
+              </button>
+            </div>
+
+            <p className="center">{formError}</p>
           </form>
         </div>
       );

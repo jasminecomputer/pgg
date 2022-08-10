@@ -35,8 +35,10 @@ Empirica.introSteps((game, treatment) => {
   steps.push(Quiz);
   return steps;
   */
+  /*
   const steps = [QuizCopy];
   return steps;
+  */
 });
 
 // The Round component containing the game UI logic.

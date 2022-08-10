@@ -5,7 +5,9 @@ import Empirica from "meteor/empirica:core";
 // the game.
 Empirica.onGameStart((game) => {
   game.players.forEach((player, i) => {
-    player.set("avatar", `/avatars/jdenticon/${player._id}`);
+    /*player.set("avatar", `/avatars/jdenticon/${player._id}`);*/
+    player.set("avatar", `/avatars/${i}.png`);
+    player.set("avatarId", i);
     player.set("cumulativePayoff", game.treatment.endowment);
   });
 });

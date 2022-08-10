@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./Task.css";
 export default class TaskStimulus extends React.Component {
   render() {
     const { game, round, stage, player } = this.props;
@@ -22,10 +22,13 @@ export default class TaskStimulus extends React.Component {
     */
 
     return (
-      <div className="task-stimulus">
-        <h3> Multiplier: {multiplier} </h3>
-        <h3> Your endowment: {endowment} </h3>
+      <div>
+        <div className="task-container">
+          <h2 className="task-heading"> Round endowment: {endowment} </h2>
+          <h3 className="task-image"> Multiplier: {multiplier} </h3>
+        </div>
 
+        {/*
         <div>Rounded table shown below</div>
 
         <div>
@@ -54,8 +57,9 @@ export default class TaskStimulus extends React.Component {
               </th>
             </tr>
           </table>
-        </div>
-        <div className="task-question">How much do you want to contribute?</div>
+            </div>
+
+    */}
       </div>
     );
   }

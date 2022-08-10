@@ -4,23 +4,21 @@ import PlayerProfile from "./PlayerProfile.jsx";
 import SocialExposure from "./SocialExposure.jsx";
 import Task from "./Task.jsx";
 import PunishmentStage from "./PunishmentStage.jsx";
-import Choices from "./ListView.jsx";
 import OutcomeStage from "./OutcomeStage.jsx";
+import "./Sidebar.css";
 
 export default class Round extends React.Component {
   render() {
     const { round, stage, player, game } = this.props;
-    const backChoices = player.get("choices");
-    const punishChoices = player.get("punishChoices");
-    const groupSize = game.treatment.playerCount;
-    console.log(stage.name);
+    const social = game.treatment.social;
     return (
       <div>
         <div>
           <div className="round">
             <div className="content">
-              <PlayerProfile player={player} stage={stage} game={game} />
-              <div>Group Size: {groupSize} </div>
+              <div className="sidebar-container">
+                <PlayerProfile player={player} stage={stage} game={game} />
+              </div>
               <div>
                 {stage.name == "contribution" ? (
                   <Task
@@ -47,7 +45,7 @@ export default class Round extends React.Component {
                   round={round}
                 />
               ) : null}
-              {game.treatment.social ? (
+              {social ? (
                 <SocialExposure stage={stage} player={player} game={game} />
               ) : null}
             </div>

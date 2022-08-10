@@ -1,0 +1,107 @@
+.punishment-body {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Comic Sans MS", "Comic Sans";
+}
+
+.otherPlayers {
+  padding: 20px;
+  display: grid;
+  justify-content: center;
+}
+
+.punishment-submitted {
+  padding: 50px;
+  display: grid;
+  justify-content: center;
+  font-size: 25px;
+  color: #1646ad;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  column-gap: 0px;
+  line-height: 0px;
+  row-gap: 0px;
+  margin: 10px 0px;
+  font-family: "Comic Sans MS", "Comic Sans";
+}
+
+.contributions-display {
+  display: flex;
+  font-size: 25px;
+  font-family: "Comic Sans MS", "Comic Sans";
+  justify-content: space-between;
+  flex-direction: row;
+  line-height: 1;
+  padding: 50px 20px;
+  margin: 10px 30px;
+}
+
+.input-area {
+  background-color: #dddddd;
+  color: #666666;
+  padding: 1em;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  outline: none;
+  font-family: "Comic Sans MS", "Comic Sans";
+  font-weight: 5000;
+  font-size: 12px;
+  line-height: 1.4;
+  width: 150px;
+  height: 30px;
+  transition: all 0.2s;
+  text-align: center;
+}
+.player-avatar {
+  width: 50%;
+  height: 50%;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.contributions-heading {
+  text-align: center;
+  padding: 20px 40 px;
+  font-family: "Comic Sans MS", "Comic Sans";
+  font-size: 30px;
+  margin: 20px;
+}
+.contributions-container {
+  line-height: 1;
+  margin: 0px;
+  padding: 0px;
+}
+
+.line {
+  width: 30%;
+  height: 1px;
+  display: inline-block;
+  padding: 0px;
+  border: 1px solid black;
+  margin: 0px;
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+}
+
+.punish-button {
+  color: antiquewhite;
+  background-color: #1646ad;
+  transition-duration: 0.4s;
+  font-size: 18px;
+}
+
+.punish-button:hover {
+  background-color: #0d2d70;
+}

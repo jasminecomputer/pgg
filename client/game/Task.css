@@ -1,0 +1,74 @@
+.task-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  column-gap: 0px;
+  align-items: center;
+  width: 1000px;
+  height: 200px;
+  line-height: 0px;
+  margin: 30px;
+}
+
+.task-heading {
+  font-size: 30px;
+  margin: 30px;
+  font-family: "Comic Sans MS", "Comic Sans";
+}
+.task-response-container {
+  margin: 200px 0px;
+  padding: 20px;
+  font-family: "Comic Sans MS", "Comic Sans";
+  line-height: 1.8;
+  font-size: 18px;
+}
+
+.task-image {
+  display: block;
+  color: antiquewhite;
+  background-image: url("/experiment/images/claypot.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 600px;
+  height: auto;
+  font-size: 18px;
+  margin: 0px;
+  padding: 0px;
+  justify-self: center;
+  line-height: 20;
+  font-family: "Comic Sans MS", "Comic Sans";
+}
+.task-body {
+  padding: 15px;
+  background-color: white;
+  margin: 0px;
+  text-align: center;
+}
+
+.text-area {
+  background-color: #dddddd;
+  color: #666666;
+  padding: 1em;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  outline: none;
+  font-family: "Comic Sans MS", "Comic Sans";
+  font-weight: 5000;
+  font-size: 18px;
+  line-height: 1.4;
+  width: 100px;
+  height: 50px;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.contribute-button {
+  color: antiquewhite;
+  background-color: #664735;
+  transition-duration: 0.4s;
+}
+
+.contribute-button:hover {
+  background-color: #4b3427;
+}

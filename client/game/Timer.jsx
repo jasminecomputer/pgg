@@ -4,6 +4,8 @@ import React from "react";
 class timer extends React.Component {
   render() {
     const { remainingSeconds } = this.props;
+    var a = Math.floor(remainingSeconds / 60);
+    var b = remainingSeconds % 60;
 
     const classes = ["timer"];
     if (remainingSeconds <= 5) {
@@ -15,10 +17,14 @@ class timer extends React.Component {
     return (
       <div className={classes.join(" ")}>
         <h4>Timer</h4>
-        <span className="seconds">{remainingSeconds}</span>
+        {/*<span className="seconds">{remainingSeconds}</span>*/}
+        <span className="seconds">
+          {a}:{b <= 10 ? 0 : null}
+          {b}
+        </span>
       </div>
     );
   }
 }
 
-export default (Timer = StageTimeWrapper(timer));
+export default Timer = StageTimeWrapper(timer);
