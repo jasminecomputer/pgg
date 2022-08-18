@@ -1,0 +1,28 @@
+.right-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  padding: 15px;
+  margin: 0px;
+  text-align: center;
+  font-size: 25px;
+  font-family: "Comic Sans MS", "Comic Sans";
+}
+
+.right-sidebar-container {
+  height: auto;
+  width: 20%;
+}
+
+.profile-avatar-other {
+  width: 50%;
+  height: auto;
+  padding: 10px;
+  justify-self: center;
+  text-align: center;
+}
+
+.players-right-sidebar {
+  margin: 20px 0px;
+  font-size: 18px;
+}

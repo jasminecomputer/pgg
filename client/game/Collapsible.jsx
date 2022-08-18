@@ -18,6 +18,7 @@ export default class Collapsible extends React.Component {
     ).className = `collapsible-header ${!this.state.open}`;
   }
 
+  /*
   render() {
     const imagePath = "/experiment/images/sample.jpeg";
     const up = "/experiment/images/uptriangle.png";
@@ -33,6 +34,16 @@ export default class Collapsible extends React.Component {
         {this.state.open ? (
           <div className="collapsible-content">{this.props.children}</div>
         ) : null}
+      </div>
+    );
+  }
+}
+*/
+
+  render() {
+    return (
+      <div>
+        <div className="collapsible-content">{this.props.children}</div>
       </div>
     );
   }

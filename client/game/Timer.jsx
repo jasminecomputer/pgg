@@ -1,5 +1,6 @@
 import { StageTimeWrapper } from "meteor/empirica:core";
 import React from "react";
+import Timer from "./Timer.jsx";
 
 class timer extends React.Component {
   render() {
@@ -19,7 +20,7 @@ class timer extends React.Component {
         <h4>Timer</h4>
         {/*<span className="seconds">{remainingSeconds}</span>*/}
         <span className="seconds">
-          {a}:{b <= 10 ? 0 : null}
+          {a}:{b < 10 ? 0 : null}
           {b}
         </span>
       </div>

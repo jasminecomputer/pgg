@@ -7,8 +7,11 @@ export default class PlayerProfile extends React.Component {
   renderProfile() {
     const { player } = this.props;
     return (
-      <div>
-        <img src={player.get("avatar")} className="profile-avatar" />
+      <div className="circle">
+        <img
+          src={player.get("avatar")}
+          className="profile-avatar avatar-background"
+        />
       </div>
     );
   }
@@ -42,7 +45,7 @@ export default class PlayerProfile extends React.Component {
         <div className="sidebar-stats">
           {this.renderProfile()}
           {this.renderScore()}
-          {this.renderGroupSize()}
+          {/*this.renderGroupSize()*/}
         </div>
         <div className="timer-sidebar">
           <Timer stage={stage} />

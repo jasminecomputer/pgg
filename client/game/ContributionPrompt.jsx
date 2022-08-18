@@ -1,6 +1,6 @@
 import React from "react";
-import "./Task.css";
-export default class TaskStimulus extends React.Component {
+import "./Contribution.css";
+export default class ContributionPrompt extends React.Component {
   render() {
     const { game, round, stage, player } = this.props;
 
@@ -23,11 +23,20 @@ export default class TaskStimulus extends React.Component {
 
     return (
       <div>
-        <div className="task-container">
-          <h2 className="task-heading"> Round endowment: {endowment} </h2>
-          <h3 className="task-image"> Multiplier: {multiplier} </h3>
+        <div className="contribution-container">
+          <h2 className="contribution-heading">
+            {" "}
+            Round endowment: {endowment}{" "}
+          </h2>
+          <h3 className="contribution-image"> Multiplier: {multiplier} </h3>
         </div>
-
+        <div className="contribution-instructions">
+          You may decide what to do with your {endowment} money units.
+          <p>
+            The total amount contributed will be multiplied by the multiplier
+            then equally divided among the group.
+          </p>
+        </div>
         {/*
         <div>Rounded table shown below</div>
 

@@ -71,7 +71,12 @@ export default class PunishmentResponse extends React.Component {
 
     return (
       <div className="center">
-        {<img src={player.get("avatar")} className="player-avatar" />}
+        {
+          <img
+            src={player.get("avatar")}
+            className="player-avatar-punishmentview"
+          />
+        }
         <div> Contributed: {contribution} MU </div>
         <form>
           <label>
@@ -109,6 +114,7 @@ export default class PunishmentResponse extends React.Component {
     const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
     const formError = this.state.formError;
     const cumulativePayoff = player.get("cumulativePayoff");
+    const punishment = game.treatment.punishment;
 
     // If the player already submitted, don't show the input or submit button
     if (player.stage.submitted) {
@@ -125,23 +131,34 @@ export default class PunishmentResponse extends React.Component {
 
     if (cumulativePayoff > 0) {
       return (
-        <div className="otherPlayers">
-          <form onSubmit={this.handleSubmit}>
-            {/*
+        <div>
+          <div className="instruction-text">
+            {" "}
+            You may punish any group members.
+            <p>
+              {" "}
+              It will cost you 1 MU (taken from your cumulative payoff) to
+              impose a punishment of {punishment} MU.{" "}
+            </p>
+          </div>
+          <div className="otherPlayers">
+            <form onSubmit={this.handleSubmit}>
+              {/*
 
           {this.renderInput()}*/}
 
-            <div className="row">
-              {otherPlayers.map((player) => this.renderInput(player))}
-            </div>
-            <div className="center">
-              <button type="submit" className="punish-button">
-                Punish
-              </button>
-            </div>
+              <div className="row">
+                {otherPlayers.map((player) => this.renderInput(player))}
+              </div>
+              <div className="center">
+                <button type="submit" className="punish-button">
+                  Punish
+                </button>
+              </div>
 
-            <p className="center">{formError}</p>
-          </form>
+              <p className="center">{formError}</p>
+            </form>
+          </div>
         </div>
       );
     } else {

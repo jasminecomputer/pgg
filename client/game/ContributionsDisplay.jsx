@@ -12,21 +12,25 @@ export default class ContributionsDisplay extends React.Component {
 
     return (
       <body>
-        <div className="contributions-container">
+        <div className="contributions-container-punishment">
           <h2 className="contributions-heading">Total Contributions</h2>
           <div className="contributions-display">
-            <div className="center">
-              <p>You contributed: </p>
-              <p>{contribution}</p>
+            <div className="contributions-display-child">
+              <div>You contributed: </div>
+              <div>{contribution}</div>
             </div>
-            <div className="center">an image?</div>
-            <div className="center">
-              <p>Others contributed: </p>
-              <p> {totalContributions - contribution}</p>
+            <div className="contributions-display-child">
+              <h3 className="all-contributions-image">
+                Total: {totalContributions}
+              </h3>
+            </div>
+            <div className="contributions-display-child">
+              <div>Others contributed: </div>
+              <div> {totalContributions - contribution}</div>
             </div>
           </div>
           <div className="center column">
-            <h2>{totalContributions} MU </h2>
+            <h2>{totalContributions} MU</h2>
             <h2> x multiplier </h2>
             <div className="line"></div>
 

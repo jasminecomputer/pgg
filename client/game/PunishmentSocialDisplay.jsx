@@ -7,35 +7,41 @@ export default class PunishmentSocialDisplay extends React.Component {
     const { game, player, me } = this.props;
     const punished = player.round.get("punished");
     const punishedBy = player.round.get("punishedBy");
+    const penalties = player.round.get("penalties");
     const contribution = player.round.get("contribution");
 
     return (
-      <div className="punishment-social-view">
+      <div className="punishment-all-view">
         <h2>
-          Player:
           <span>
-            {<img src={player.get("avatar")} className="player-avatar" />}
+            {
+              <img
+                src={player.get("avatar")}
+                className="player-avatar-allview"
+              />
+            }
           </span>
           <div> Contributed: {contribution} MU </div>
+          <div> Penalties: {penalties} MU </div>
         </h2>
-        <h2 className="flex-item">
+        <div className="left-div-social">
           Punished:
           <ListView
             punishments={punished}
             game={game}
-            className="punishment-all-view"
+            className="punishment-social-view"
             me={me}
           />
-        </h2>
-        <h2 className="flex-item">
+        </div>
+        <div className="right-div-social">
           Punished by:
           <ListView
             punishments={punishedBy}
             game={game}
-            className="punishment-all-view"
+            className="punishment-social-view"
             me={me}
           />
-        </h2>
+        </div>
       </div>
     );
   }

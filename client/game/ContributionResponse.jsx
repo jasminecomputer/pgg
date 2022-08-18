@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import "./Task.css";
+import "./Contribution.css";
 
-export default class TaskResponse extends React.Component {
+export default class ContributionResponse extends React.Component {
   handleChange = (event) => {
     const { player } = this.props;
-    const value = event.target.value;
+    const value = parseFloat(event.target.value);
     player.round.set("contribution", value);
   };
 
@@ -16,8 +16,8 @@ export default class TaskResponse extends React.Component {
 
   renderSubmitted() {
     return (
-      <div className="task-response-container">
-        <div className="response-submitted">
+      <div className="contribution-response-container">
+        <div className="contribution-submitted text-size">
           <h5>Waiting on other players' contributions...</h5>
         </div>
       </div>
@@ -67,7 +67,7 @@ export default class TaskResponse extends React.Component {
     }
 
     return (
-      <div className="task-response-container">
+      <div className="contribution-response-container">
         <form onSubmit={this.handleSubmit}>
           {this.renderInput()}
 

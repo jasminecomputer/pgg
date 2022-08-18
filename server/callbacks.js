@@ -111,7 +111,7 @@ function computePunishmentCosts(game, round) {
       }
     }
     const penalties =
-      parseFloat(receivedPunishments) * game.treatment.punishmentMultiplier;
+      parseFloat(receivedPunishments) * game.treatment.punishment;
     player.round.set("penalties", penalties);
   });
 }

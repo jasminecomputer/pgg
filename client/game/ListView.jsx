@@ -8,7 +8,7 @@ export default class ListView extends React.Component {
     console.log(player);
     return (
       <div>
-        {<img src={player.get("avatar")} className="player-avatar" />}
+        {<img src={player.get("avatar")} className="player-avatar-listview" />}
         {/*<img src={`/avatars/jdenticon/${player}`} className="player-avatar" />*/}
 
         <p>x{punishments[playerId]}</p>

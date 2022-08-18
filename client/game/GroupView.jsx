@@ -1,15 +1,15 @@
 import React from "react";
 import Slider from "meteor/empirica:slider";
 import Choices from "./ListView.jsx";
+import "./RightSidebar.css";
 
-export default class SocialExposure extends React.Component {
+export default class GroupView extends React.Component {
   renderSocialInteraction(otherPlayer) {
     const cumulativePayoff = otherPlayer.get("cumulativePayoff");
     return (
       <div className="alter" key={otherPlayer._id}>
-        <img src={otherPlayer.get("avatar")} className="profile-avatar" />
-        <div>Player key: {otherPlayer._id}</div> <br></br>
-        <div>Player Total MU: {cumulativePayoff}</div>
+        <img src={otherPlayer.get("avatar")} className="profile-avatar-other" />
+        {/*} <div>Player key: {otherPlayer._id}</div> <br></br>*/}
       </div>
     );
   }
@@ -24,11 +24,12 @@ export default class SocialExposure extends React.Component {
     }
 
     return (
-      <div className="social-exposure">
-        <p>
-          <strong>There are {otherPlayers.length} other players:</strong>
-        </p>
-        {otherPlayers.map((p) => this.renderSocialInteraction(p))}
+      <div className="right-sidebar">
+        <h4>Group Size</h4>
+        <div>{game.treatment.playerCount}</div>
+        <div className="players-right-sidebar">
+          {otherPlayers.map((p) => this.renderSocialInteraction(p))}
+        </div>
       </div>
     );
   }

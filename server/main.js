@@ -38,7 +38,7 @@ Empirica.gameInit((game) => {
       durationInSeconds: game.treatment.stageDuration,
     });
 
-    if (game.treatment.punishment == true) {
+    if (game.treatment.punishment > 0) {
       round.addStage({
         name: "punishment",
         displayName: "Punishment",
