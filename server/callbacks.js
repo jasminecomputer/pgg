@@ -28,7 +28,11 @@ Empirica.onRoundStart((game, round) => {
 
 // onStageStart is triggered before each stage starts.
 // It receives the same options as onRoundStart, and the stage that is starting.
-Empirica.onStageStart((game, round, stage) => {});
+Empirica.onStageStart((game, round, stage) => {
+  if (stage.name == "outcome") {
+    computeIndividualPayoff(game, round);
+  }
+});
 
 // onStageEnd is triggered after each stage.
 // It receives the same options as onRoundEnd, and the stage that just ended.
@@ -38,7 +42,7 @@ Empirica.onStageEnd((game, round, stage) => {
   } //player.stage.set values but wait to update until round end
   if (stage.name == "punishment") {
     computePunishmentCosts(game, round);
-    computeIndividualPayoff(game, round);
+    // computeIndividualPayoff(game, round);
   }
 });
 
@@ -124,8 +128,8 @@ function computeIndividualPayoff(game, round) {
     const remainingEndowment =
       parseFloat(game.treatment.endowment) - parseFloat(contribution);
     player.round.set("remainingEndowment", remainingEndowment);
-    const penalties = player.round.get("penalties");
-    const costs = player.round.get("costs");
+    const penalties = player.round.get("penalties") || 0;
+    const costs = player.round.get("costs") || 0;
     const roundPayoff =
       parseFloat(payoff) +
       parseFloat(remainingEndowment) -
