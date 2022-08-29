@@ -26,15 +26,21 @@ export default class ContributionPrompt extends React.Component {
         <div className="contribution-container">
           <h2 className="contribution-heading">
             {" "}
-            Round endowment: {endowment}{" "}
+            Round starting funds: {endowment}{" "}
           </h2>
-          <h3 className="contribution-image"> Multiplier: {multiplier} </h3>
+          <div className="contribution-img-container">
+            <img
+              className="contribution-img"
+              src="/experiment/images/claypot.png"
+            ></img>
+            <h3 className="centered-multiplier"> Multiplier: {multiplier} </h3>
+          </div>
         </div>
         <div className="contribution-instructions">
-          You may decide what to do with your {endowment} money units.
           <p>
-            The total amount contributed will be multiplied by the multiplier
-            then equally divided among the group.
+            You can contribute any of your {endowment} money units towards the
+            public fund, which will be multiplied then divided equally among the
+            group.
           </p>
         </div>
         {/*

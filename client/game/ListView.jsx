@@ -27,8 +27,6 @@ export default class ListView extends React.Component {
       }
     }
 
-    console.log("nonzero punishments", nonzeroPunishments);
-
     if (Object.keys(nonzeroPunishments).length == 0) {
       return <div className="none"> None </div>;
     }

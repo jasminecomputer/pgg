@@ -12,7 +12,7 @@ export default class PunishmentSocialDisplay extends React.Component {
 
     return (
       <div className="punishment-all-view">
-        <h2>
+        <p>
           <span>
             {
               <img
@@ -21,9 +21,11 @@ export default class PunishmentSocialDisplay extends React.Component {
               />
             }
           </span>
-          <div> Contributed: {contribution} MU </div>
-          <div> Penalties: {penalties} MU </div>
-        </h2>
+          <span>
+            <div> Contributed: {contribution} MU </div>
+            <div> Penalties: {penalties} MU </div>
+          </span>
+        </p>
         <div className="left-div-social">
           Punished:
           <ListView

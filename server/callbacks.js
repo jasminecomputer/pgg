@@ -1,3 +1,4 @@
+import { ALIGN_LEFT } from "@blueprintjs/core/lib/esm/common/classes";
 import Empirica from "meteor/empirica:core";
 
 // onGameStart is triggered opnce per game before the game starts, and before
@@ -140,7 +141,7 @@ function computeTotalPayoff(game) {
   let totalPayoff = 0;
   game.players.forEach((player) => {
     const cumulativePayoff = player.get("cumulativePayoff");
-    totalPayoff += parseFloat(payoff);
+    totalPayoff += parseFloat(cumulativePayoff);
     game.set("totalPayoff", totalPayoff);
   });
 }
@@ -149,8 +150,13 @@ function computeTotalPayoff(game) {
 function convertPayoff(game) {
   game.players.forEach((player) => {
     const cumulativePayoff = player.get("cumulativePayoff");
-    const money = parseFloat(cumulativePayoff) * game.treatment.conversionRate;
-    player.set("convertedMoney", money);
+    let earnings = 0;
+    if (cumulativePayoff > 0) {
+      let earnings =
+        parseFloat(cumulativePayoff) * game.treatment.conversionRate;
+    } else {
+    }
+    player.set("earnings", earnings);
   });
 }
 

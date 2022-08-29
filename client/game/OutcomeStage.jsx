@@ -1,6 +1,6 @@
 import React from "react";
 import ListView from "./ListView.jsx";
-import Collapsible from "./Collapsible.jsx";
+import AllPunishments from "./AllPunishments.jsx";
 import PunishmentSocialDisplay from "./PunishmentSocialDisplay.jsx";
 import "./OutcomeStage.css";
 
@@ -47,7 +47,6 @@ export default class OutcomeStage extends React.Component {
       <div className="next-round center">
         <div className="center">
           <h5>Waiting on other players...</h5>
-          Please wait until all players are ready
         </div>
       </div>
     );
@@ -66,11 +65,6 @@ export default class OutcomeStage extends React.Component {
     const roundPayoff = player.round.get("roundPayoff");
     const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
 
-    /*
-    if (player.stage.submitted) {
-      return <body className="outcome-body"> {this.renderSubmitted()} </body>;
-    }
-*/
     return (
       <body className="outcome-body">
         <div className="centered-text">
@@ -102,7 +96,6 @@ export default class OutcomeStage extends React.Component {
                   <div>
                     <div className="left-div">
                       <h2>
-                        {/*You punished:*/}
                         <ListView
                           punishments={punished}
                           game={game}
@@ -112,7 +105,6 @@ export default class OutcomeStage extends React.Component {
                     </div>
                     <span className="right-div">
                       <h2>
-                        {/*Punished you:{" "}*/}
                         {
                           <ListView
                             punishments={punishedBy}
@@ -129,26 +121,32 @@ export default class OutcomeStage extends React.Component {
                     <div className="payoff-text">
                       <h2> Round payoff: {/*{payoff} MU*/} </h2>
                       <h2>
-                        Remaining endowment: {/*{remainingEndowment} MU*/}
+                        Remaining private funds: {/*{remainingEndowment} MU*/}
                       </h2>
                       <h2> Punishment costs: {/*} -{costs} MU */} </h2>
                       <h2>Punishment penalties: {/*-{penalties} MU*/}</h2>
-                      <div className="payoff-line"></div>
-
-                      <h1>TOTAL</h1>
                     </div>
                     <div className="payoff-numbers">
                       <h2> {payoff} MU </h2>
                       <h2>{remainingEndowment} MU</h2>
                       <h2 className="outcome-costs"> -{costs} MU </h2>
                       <h2 className="outcome-costs"> -{penalties} MU</h2>
-                      <div className="payoff-line"></div>
-                      {roundPayoff >= 0 ? (
-                        <h1 className="net-positive"> + {roundPayoff} MU </h1>
-                      ) : (
-                        <h1 className="net-negative"> {roundPayoff} MU</h1>
-                      )}
                     </div>
+                  </div>
+                  <div className="payoff-line"></div>
+                  <div className="payoff-container-end">
+                    <h1 className="total-left"> TOTAL </h1>
+                    {roundPayoff >= 0 ? (
+                      <h1 className="net-positive total-right">
+                        {" "}
+                        + {roundPayoff} MU{" "}
+                      </h1>
+                    ) : (
+                      <h1 className="net-negative total-right">
+                        {" "}
+                        {roundPayoff} MU
+                      </h1>
+                    )}
                   </div>
                 </div>
               </div>
@@ -156,7 +154,7 @@ export default class OutcomeStage extends React.Component {
           </div>
           <div className="tabs-content--false" id="punishmentsContent">
             <h4 className="outcome-heading">All Punishments</h4>
-            <Collapsible
+            <AllPunishments
               title={"View All Punishments"}
               children={otherPlayers.map((p) => (
                 <PunishmentSocialDisplay game={game} player={p} me={player} />
@@ -164,7 +162,7 @@ export default class OutcomeStage extends React.Component {
               game={game}
               player={player}
               round={round}
-            ></Collapsible>
+            />
           </div>
         </div>
         <div className="next-round center">

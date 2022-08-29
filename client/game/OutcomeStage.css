@@ -38,10 +38,18 @@
   display: none;
 }
 
+.total-left {
+  padding: 0rem 9rem;
+}
+
+.total-right {
+  padding: 0rem 9rem;
+}
+
 .punishment-display-container {
   margin: 0px;
   padding: 0px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(221, 64, 64);
 }
 .outcome-heading {
   font-family: "Comic Sans MS", "Comic Sans";
@@ -56,16 +64,17 @@
 .player-avatar-allview {
   width: 20%;
   height: auto;
+  flex-wrap: wrap;
   text-align: center;
   margin: 0px;
   padding: 0px;
 }
 
 .player-avatar-listview {
-  width: 7rem;
+  width: 60%;
   height: auto;
   text-align: center;
-  margin: 5px;
+  margin: 0px;
   padding: 0px;
 }
 
@@ -87,12 +96,13 @@
 
 .summary {
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-content: flex-start;
   line-height: 1;
   gap: 0px;
-  margin: 170px 0px;
+  margin: 100px 0px 5px 0px;
   background-color: rgb(255, 255, 255);
   font-family: "Comic Sans MS", "Comic Sans";
 }
@@ -103,6 +113,11 @@
   justify-content: center;
 }
 
+.payoff-container-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .payoff-text {
   display: grid;
   justify-items: start;
@@ -220,12 +235,14 @@
   flex-shrink: 0;
 }
 .payoff-line {
-  width: 120%;
+  width: 100%;
   height: 1px;
   padding: 0;
   border: 1px solid black;
   margin: 0px;
   text-align: center;
+  justify-self: center;
+  display: block;
 }
 
 .collapsible {
@@ -253,7 +270,7 @@
 }
 
 .next-round {
-  font-size: 20px;
+  font-size: 25px;
 }
 .next-button {
   font-size: 18px;

@@ -27,18 +27,14 @@ Empirica.newPlayer(NewPlayer);
 
 Empirica.introSteps((game, treatment) => {
   /*
-
   const steps = [InstructionStepOne];
-  if (treatment.playerCount > 1) {
+
+  if (treatment.punishment > 0) {
     steps.push(InstructionStepTwo);
   }
   steps.push(Quiz);
-  return steps;
-  */
-  /*
-  const steps = [QuizCopy];
-  return steps;
-  */
+
+  return steps;*/
 });
 
 // The Round component containing the game UI logic.

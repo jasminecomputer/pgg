@@ -7,7 +7,7 @@
 }
 
 .otherPlayers {
-  padding: 20px;
+  padding: 0px;
   display: grid;
   justify-content: center;
 }
@@ -23,14 +23,16 @@
 .instruction-text {
   text-align: center;
   font-size: 20px;
+  margin: 10px 0px;
+  padding: 0px 100px;
+  background-color: rgb(255, 255, 255);
 }
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  margin: 10px 0px 20px 0px;
+  justify-content: center;
+  margin: 10px 0px;
   flex-wrap: wrap;
-  height: 150%;
 }
 .column {
   display: flex;
@@ -66,6 +68,8 @@
 
 .center-column {
   margin: 0px;
+  display: flex;
+  flex-direction: column;
 }
 
 /*
@@ -101,12 +105,20 @@
   text-align: center;
 }
 
+.contributions-text {
+  font-family: "Comic Sans MS", "Comic Sans";
+  font-size: 20px;
+}
+.payoff {
+  background-color: yellow;
+}
+
 .contributions-heading {
   text-align: center;
   padding: 20px 40 px;
   font-family: "Comic Sans MS", "Comic Sans";
   font-size: 30px;
-  margin: 20px;
+  margin: 0px;
 }
 
 .all-contributions-image {
@@ -129,7 +141,7 @@
   justify-content: flex-start;
   flex-direction: column;
   align-items: center;
-  line-height: 0;
+  line-height: 1.8;
   margin: 0px;
   background-color: rgb(255, 255, 255);
   width: 100%;

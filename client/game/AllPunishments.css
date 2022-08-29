@@ -1,10 +1,10 @@
-.collapsible-content {
+.all-content {
   cursor: pointer;
   padding: 15px;
   display: flex;
   flex-direction: column;
 }
-.collapsible-header {
+.all-header {
   text-align: left;
   background-color: darkseagreen;
   color: aliceblue;

@@ -19,20 +19,21 @@ export default class ExitSurvey extends React.Component {
   static stepName = "ExitSurvey";
   state = { age: "", gender: "", strength: "", fair: "", feedback: "" };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const el = event.currentTarget;
     this.setState({ [el.name]: el.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.props.onSubmit(this.state);
   };
 
   render() {
-    const { player } = this.props;
+    const { game, player } = this.props;
     const { age, gender, strength, fair, feedback, education } = this.state;
-
+    const earnings = player.get("earnings");
+    const basePay = game.treatment.basePay;
     return (
       <Centered>
         <div className="exit-survey">
@@ -41,10 +42,21 @@ export default class ExitSurvey extends React.Component {
             Please submit the following code to receive your bonus:{" "}
             <strong>{player._id}</strong>.
           </p>
+          {/*<p>Earnings: {earnings}</p>*/}
           <p>
-            You final <strong>bonus</strong> is in addition of the{" "}
-            <strong>1 base reward</strong> for completing the HIT.
+            Your final <strong>bonus</strong> is $7 in addition of the
+            <strong> $3 reward</strong> for completing the HIT.
           </p>
+          {/*
+          <p>
+            Your final <strong>bonus</strong> is $7 in addition of the{" "}
+            <strong> ${basePay} reward</strong> for completing the HIT.
+    </p>*/}
+          {/*}
+          <p>
+            Your final <strong>bonus</strong> is in addition of the{" "}
+            <strong>1 base reward</strong> for completing the HIT.
+    </p>*/}
           <br />
           <p>
             Please answer the following short survey. You do not have to provide

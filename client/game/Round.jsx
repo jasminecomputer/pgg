@@ -1,12 +1,12 @@
 import React from "react";
 
-import PlayerProfile from "./PlayerProfile.jsx";
-import GroupView from "./GroupView.jsx";
+import PlayerSidebar from "./PlayerSidebar.jsx";
+import GroupSidebar from "./GroupSidebar.jsx";
 import Contribution from "./Contribution.jsx";
 import PunishmentStage from "./PunishmentStage.jsx";
 import OutcomeStage from "./OutcomeStage.jsx";
-import "./Sidebar.css";
-import "./RightSidebar.css";
+import "./PlayerSidebar.css";
+import "./GroupSidebar.css";
 
 export default class Round extends React.Component {
   render() {
@@ -16,7 +16,12 @@ export default class Round extends React.Component {
       <div className="round">
         <div className="round-content">
           <div className="sidebar-container">
-            <PlayerProfile player={player} stage={stage} game={game} />
+            <PlayerSidebar
+              player={player}
+              stage={stage}
+              game={game}
+              round={round}
+            />
           </div>
 
           <div>
@@ -47,19 +52,9 @@ export default class Round extends React.Component {
           ) : null}
           <div className="right-sidebar-container">
             {stage.name == "contribution" ? (
-              <GroupView player={player} stage={stage} game={game} />
+              <GroupSidebar player={player} stage={stage} game={game} />
             ) : null}
           </div>
-          {/*
-          <div className="right-sidebar-container">
-            <GroupView player={player} stage={stage} game={game} />
-            </div>*/}
-
-          {social ? (
-            <div>
-              <SocialExposure stage={stage} player={player} game={game} />{" "}
-            </div>
-          ) : null}
         </div>
       </div>
     );

@@ -120,7 +120,7 @@ export default class PunishmentResponse extends React.Component {
     if (player.stage.submitted) {
       if (cumulativePayoff < 0) {
         return (
-          <div>
+          <div className="center">
             <div>You do not have enough to punish other players</div>
             {this.renderSubmitted()}
           </div>
@@ -132,27 +132,28 @@ export default class PunishmentResponse extends React.Component {
     if (cumulativePayoff > 0) {
       return (
         <div>
+          {/*<h3 className="center contributions-heading">Punishment</h3>*/}
           <div className="instruction-text">
             {" "}
-            You may punish any group members.
             <p>
               {" "}
-              It will cost you 1 MU (taken from your cumulative payoff) to
-              impose a punishment of {punishment} MU.{" "}
+              It will cost you 1 MU to impose a punishment of {punishment} MU.
+              The costs will be taken directly from your cumulative payoff, so
+              you cannot exceed {cumulativePayoff} punishments.
             </p>
           </div>
-          <div className="otherPlayers">
+          <div className="otherPlayers center">
+            (leaving a punishment input blank is equivalent to zero punishment)
             <form onSubmit={this.handleSubmit}>
               {/*
 
           {this.renderInput()}*/}
-
               <div className="row">
                 {otherPlayers.map((player) => this.renderInput(player))}
               </div>
               <div className="center">
                 <button type="submit" className="punish-button">
-                  Punish
+                  Next
                 </button>
               </div>
 

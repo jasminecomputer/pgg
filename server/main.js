@@ -35,20 +35,20 @@ Empirica.gameInit((game) => {
     round.addStage({
       name: "contribution",
       displayName: "Contribution",
-      durationInSeconds: game.treatment.stageDuration,
+      durationInSeconds: game.treatment.contributionDuration,
     });
 
     if (game.treatment.punishment > 0) {
       round.addStage({
         name: "punishment",
         displayName: "Punishment",
-        durationInSeconds: game.treatment.stageDuration,
+        durationInSeconds: game.treatment.punishmentDuration,
       });
     }
     round.addStage({
       name: "outcome",
       displayName: "Outcome",
-      durationInSeconds: game.treatment.stageDuration,
+      durationInSeconds: game.treatment.outcomeDuration,
     });
   });
 });

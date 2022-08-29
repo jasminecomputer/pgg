@@ -29,7 +29,7 @@ export default class ContributionResponse extends React.Component {
     const endowment = game.treatment.endowment;
     return (
       <div>
-        <div>Amount you would like to contribute:</div>
+        <div>Contribute:</div>
 
         <label>
           <input
@@ -37,6 +37,7 @@ export default class ContributionResponse extends React.Component {
             onChange={this.handleChange}
             min="0"
             max={endowment}
+            placeholder="0 if left blank"
             className="text-area"
           />
         </label>

@@ -46,8 +46,9 @@ export default class QuizCopy extends React.Component {
         <div className="quiz">
           <h1>Quiz </h1>
           <h3>
-            Before we start, we would like to check whether you have truly
-            understood the structure of the game.
+            Before we start, we would like to introduce the structure of the
+            game and check whether you have truly understood the structure of
+            the game.
           </h3>
           <div>
             <h4>Imagine the following game:</h4>

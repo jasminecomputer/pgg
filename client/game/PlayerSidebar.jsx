@@ -1,9 +1,9 @@
 import React from "react";
 import { Icon } from "@blueprintjs/core";
-import "./Sidebar.css";
+import "./PlayerSidebar.css";
 import Timer from "./Timer.jsx";
 
-export default class PlayerProfile extends React.Component {
+export default class PlayerSidebar extends React.Component {
   renderProfile() {
     const { player } = this.props;
     return (
@@ -26,30 +26,35 @@ export default class PlayerProfile extends React.Component {
     );
   }
 
-  renderGroupSize() {
-    const { game } = this.props;
-    const groupSize = game.treatment.playerCount;
+  renderNumRounds() {
+    const { game, round } = this.props;
+    const numRounds = game.treatment.numRounds;
     return (
       <div>
-        <h4>Group Size</h4>
-        <span>{groupSize}</span>{" "}
+        <h4>Round</h4>
+        <span>
+          {round.index + 1}/{numRounds}
+        </span>{" "}
       </div>
     );
   }
 
   render() {
-    const { stage } = this.props;
+    const { game, stage, round } = this.props;
+    const showNRounds = game.treatment.showNRounds;
 
     return (
       <aside className="sidebar">
         <div className="sidebar-stats">
           {this.renderProfile()}
           {this.renderScore()}
-          {/*this.renderGroupSize()*/}
-        </div>
-        <div className="timer-sidebar">
+          {showNRounds ? this.renderNumRounds() : null}
           <Timer stage={stage} />
         </div>
+        {/*
+        <div className="timer-sidebar">
+          <Timer stage={stage} />
+    </div>*/}
       </aside>
     );
   }
