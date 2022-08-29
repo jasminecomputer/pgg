@@ -61,110 +61,152 @@ export default class OutcomeStage extends React.Component {
     const costs = player.round.get("costs");
     const punishedBy = player.round.get("punishedBy");
     const penalties = player.round.get("penalties");
-    const remainingEndowment = player.round.get("remainingEndowment");
+    const contribution = player.round.get("contribution");
+    const remainingEndowment =
+      parseFloat(game.treatment.endowment) - parseFloat(contribution);
+    const roundPayoffNoPunishment = remainingEndowment + parseFloat(payoff);
     const roundPayoff = player.round.get("roundPayoff");
     const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
+    const punishment = game.treatment.punishment;
 
     return (
       <body className="outcome-body">
-        <div className="centered-text">
-          <div className="tabs-navbar">
-            <button
-              onClick={(e) => this.toggleSummaryTab(e)}
-              className="tabs-button--true"
-              id="summaryTab"
-            >
+        {punishment == 0 ? (
+          <div>
+            <div className="centered-text outcome-heading">
               Your Round Summary
-            </button>
-            <button
-              onClick={(e) => this.togglePunishmentsTab(e)}
-              className="tabs-button--false"
-              id="punishmentsTab"
-            >
-              View All Punishments
-            </button>
-          </div>
-          <div className="tabs-content--true" id="summaryContent">
-            <h4 className="outcome-heading">Round Summary</h4>
-            <div>
-              <div>
-                <div className="outcome-subheading">
-                  <div> You punished </div>
-                  <div> Punished you </div>
+            </div>
+            <div className="summary">
+              <div className="payoff-container">
+                <div className="payoff-text">
+                  <h2> Round payoff: {/*{payoff} MU*/} </h2>
+                  <h2>
+                    Remaining private funds: {/*{remainingEndowment} MU*/}
+                  </h2>
                 </div>
-                <div className="punishment-display-container">
-                  <div>
-                    <div className="left-div">
-                      <h2>
-                        <ListView
-                          punishments={punished}
-                          game={game}
-                          className="punishment-social-view"
-                        />
-                      </h2>
-                    </div>
-                    <span className="right-div">
-                      <h2>
-                        {
+                <div className="payoff-numbers">
+                  <h2> {payoff} MU </h2>
+                  <h2>{remainingEndowment} MU</h2>
+                </div>
+              </div>
+              <div className="payoff-line"></div>
+              <div className="payoff-container-end">
+                <h1 className="total-left"> TOTAL </h1>
+                {roundPayoffNoPunishment >= 0 ? (
+                  <h1 className="net-positive total-right">
+                    {" "}
+                    + {roundPayoffNoPunishment} MU{" "}
+                  </h1>
+                ) : (
+                  <h1 className="net-negative total-right">
+                    {" "}
+                    {roundPayoffNoPunishment} MU
+                  </h1>
+                )}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="centered-text">
+            <div className="tabs-navbar">
+              <button
+                onClick={(e) => this.toggleSummaryTab(e)}
+                className="tabs-button--true"
+                id="summaryTab"
+              >
+                Your Round Summary
+              </button>
+              <button
+                onClick={(e) => this.togglePunishmentsTab(e)}
+                className="tabs-button--false"
+                id="punishmentsTab"
+              >
+                View All Punishments
+              </button>
+            </div>
+            <div className="tabs-content--true" id="summaryContent">
+              <h4 className="outcome-heading">Round Summary</h4>
+              <div>
+                <div>
+                  <div className="outcome-subheading">
+                    <div> You punished </div>
+                    <div> Punished you </div>
+                  </div>
+                  <div className="punishment-display-container">
+                    <div>
+                      <div className="left-div">
+                        <h2>
                           <ListView
-                            punishments={punishedBy}
+                            punishments={punished}
                             game={game}
                             className="punishment-social-view"
                           />
-                        }
-                      </h2>
-                    </span>
-                  </div>
-                </div>
-                <div className="summary">
-                  <div className="payoff-container">
-                    <div className="payoff-text">
-                      <h2> Round payoff: {/*{payoff} MU*/} </h2>
-                      <h2>
-                        Remaining private funds: {/*{remainingEndowment} MU*/}
-                      </h2>
-                      <h2> Punishment costs: {/*} -{costs} MU */} </h2>
-                      <h2>Punishment penalties: {/*-{penalties} MU*/}</h2>
-                    </div>
-                    <div className="payoff-numbers">
-                      <h2> {payoff} MU </h2>
-                      <h2>{remainingEndowment} MU</h2>
-                      <h2 className="outcome-costs"> -{costs} MU </h2>
-                      <h2 className="outcome-costs"> -{penalties} MU</h2>
+                        </h2>
+                      </div>
+                      <span className="right-div">
+                        <h2>
+                          {
+                            <ListView
+                              punishments={punishedBy}
+                              game={game}
+                              className="punishment-social-view"
+                            />
+                          }
+                        </h2>
+                      </span>
                     </div>
                   </div>
-                  <div className="payoff-line"></div>
-                  <div className="payoff-container-end">
-                    <h1 className="total-left"> TOTAL </h1>
-                    {roundPayoff >= 0 ? (
-                      <h1 className="net-positive total-right">
-                        {" "}
-                        + {roundPayoff} MU{" "}
-                      </h1>
-                    ) : (
-                      <h1 className="net-negative total-right">
-                        {" "}
-                        {roundPayoff} MU
-                      </h1>
-                    )}
+                  <div className="summary">
+                    <div className="payoff-container">
+                      <div className="payoff-text">
+                        <h2> Round payoff: {/*{payoff} MU*/} </h2>
+                        <h2>
+                          Remaining private funds: {/*{remainingEndowment} MU*/}
+                        </h2>
+                        <h2> Punishment costs: {/*} -{costs} MU */} </h2>
+                        <h2>Punishment penalties: {/*-{penalties} MU*/}</h2>
+                      </div>
+                      <div className="payoff-numbers">
+                        <h2> {payoff} MU </h2>
+                        <h2>{remainingEndowment} MU</h2>
+                        <h2 className="outcome-costs"> -{costs} MU </h2>
+                        <h2 className="outcome-costs"> -{penalties} MU</h2>
+                      </div>
+                    </div>
+                    <div className="payoff-line"></div>
+                    <div className="payoff-container-end">
+                      <h1 className="total-left"> TOTAL </h1>
+                      {roundPayoff >= 0 ? (
+                        <h1 className="net-positive total-right">
+                          {" "}
+                          + {roundPayoff} MU{" "}
+                        </h1>
+                      ) : (
+                        <h1 className="net-negative total-right">
+                          {" "}
+                          {roundPayoff} MU
+                        </h1>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div className="tabs-content--false" id="punishmentsContent">
+              <h4 className="outcome-heading">All Punishments</h4>
+              <AllPunishments
+                title={"View All Punishments"}
+                children={otherPlayers.map((p) => (
+                  <PunishmentSocialDisplay game={game} player={p} me={player} />
+                ))}
+                game={game}
+                player={player}
+                round={round}
+              />
+            </div>
           </div>
-          <div className="tabs-content--false" id="punishmentsContent">
-            <h4 className="outcome-heading">All Punishments</h4>
-            <AllPunishments
-              title={"View All Punishments"}
-              children={otherPlayers.map((p) => (
-                <PunishmentSocialDisplay game={game} player={p} me={player} />
-              ))}
-              game={game}
-              player={player}
-              round={round}
-            />
-          </div>
-        </div>
+        )}
+
         <div className="next-round center">
           {player.stage.submitted ? (
             <body className="outcome-body"> {this.renderSubmitted()} </body>
