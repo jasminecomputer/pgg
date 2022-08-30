@@ -73,9 +73,7 @@ export default class OutcomeStage extends React.Component {
       <body className="outcome-body">
         {punishment == 0 ? (
           <div>
-            <div className="centered-text outcome-heading">
-              Your Round Summary
-            </div>
+            <h4 className="centered-text outcome-heading">Round Summary</h4>
             <div className="summary">
               <div className="payoff-container">
                 <div className="payoff-text">

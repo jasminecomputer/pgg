@@ -26,7 +26,6 @@ Empirica.newPlayer(NewPlayer);
 // different instruction steps depending on the assigned treatment.
 
 Empirica.introSteps((game, treatment) => {
-  /*
   const steps = [InstructionStepOne];
 
   if (treatment.punishment > 0) {
@@ -34,7 +33,7 @@ Empirica.introSteps((game, treatment) => {
   }
   steps.push(Quiz);
 
-  return steps;*/
+  return steps;
 });
 
 // The Round component containing the game UI logic.
